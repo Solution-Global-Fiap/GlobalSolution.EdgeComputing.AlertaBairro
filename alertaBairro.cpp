@@ -19,6 +19,7 @@ void setup() {
     pinMode(BUZZER, OUTPUT);
 
     pinMode(SENSOR_HUMIDITY_POTENTIOMETER, INPUT);
+    pinMode(SENSOR_FORCE, INPUT);
 
     lcd.init();
     lcd.clear();
@@ -28,7 +29,10 @@ void setup() {
 }
 
 void loop() {
-
+    //getTemperatureCelsius();
+  	//getHumidityPercentage();
+  	//getSoilMoisturePercentage();
+    getForceNewton();
 }
 
 void turnLeds(int green, int yellow, int red) {
@@ -53,11 +57,31 @@ long getHumidityPercentage() {
 
 long getTemperatureCelsius() {
 	int rawValue = analogRead(SENSOR_TEMPERATURE);
-    long voltage = (rawValue / 1023.0) * 5000.0;
-    long tempCelsius = (voltage - 500) * 0.1;
+    double voltage = (rawValue / 1023.0) * 5000.0;
+    double tempCelsius = (voltage - 500) * 0.1;
 
 	Serial.print("Temperatura: ");
   	Serial.println(tempCelsius);
 
-  	return tempCelsius;
+  	return (long)tempCelsius;
+}
+
+long getSoilMoisturePercentage() {
+    double moisture = analogRead(SENSOR_SOIL_MOISTURE);
+    long moisturePercentage = map(moisture, 0, 876, 0, 100);
+
+    Serial.print("Humidade Solo: ");
+    Serial.println(moisturePercentage);
+
+    return moisturePercentage;
+}
+long getForceNewton() {
+    int force = analogRead(SENSOR_FORCE);
+    //double forceNewtons = map(force, 0, 466, 0, 1000) / 100.0;
+  	double forceNewton = (7.011e-8 * force * force * force + 1.468e-6 * force * force + 0.00545 * force - 0.00133) + 0.02;
+
+    Serial.print("Forca aplicada: ");
+    Serial.println(forceNewton);
+
+    return (long)forceNewtons;
 }
