@@ -40,3 +40,24 @@ void turnLeds(int green, int yellow, int red) {
 void turnBuzzer(int buzzer) {
     digitalWrite(BUZZER, buzzer);
 }
+
+long getHumidityPercentage() {
+  	int humiditySensorOutput = analogRead(SENSOR_HUMIDITY_POTENTIOMETER);
+	long humidityPercentage = map(humiditySensorOutput, 0, 1023, 0, 100);
+
+	Serial.print("Humidade: ");
+  	Serial.println(humidityPercentage);
+
+	return humidityPercentage;
+}
+
+long getTemperatureCelsius() {
+	int rawValue = analogRead(SENSOR_TEMPERATURE);
+    long voltage = (rawValue / 1023.0) * 5000.0;
+    long tempCelsius = (voltage - 500) * 0.1;
+
+	Serial.print("Temperatura: ");
+  	Serial.println(tempCelsius);
+
+  	return tempCelsius;
+}
