@@ -30,3 +30,13 @@ void setup() {
 void loop() {
 
 }
+
+void turnLeds(int green, int yellow, int red) {
+    digitalWrite(LED_GREEN, green);
+    digitalWrite(LED_YELLOW, yellow);
+    digitalWrite(LED_RED, red);
+}
+
+void turnBuzzer(int buzzer) {
+    digitalWrite(BUZZER, buzzer);
+}
