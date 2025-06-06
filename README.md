@@ -4,6 +4,12 @@ O **AlertaBairro** é um sistema embarcado baseado em Arduino que monitora vari�
 
 ---
 
+## 👨‍💻 Membros do Grupo
+
+- **Diogo Oliveira Lima** - RM: 562559  
+- **Lucas dos Reis Aquino** - RM: 562414  
+- **Lucas Perez Bonato** - RM: 565356
+
 ## 🛠 TinkerCad: 
 
  - [Projeto](https://www.tinkercad.com/things/eqazHuI6MxB-global-solution/editel?returnTo=https%3A%2F%2Fwww.tinkercad.com%2Fdashboard)
