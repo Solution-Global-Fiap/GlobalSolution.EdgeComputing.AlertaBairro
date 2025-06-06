@@ -4,7 +4,12 @@ O **AlertaBairro** é um sistema embarcado baseado em Arduino que monitora vari�
 
 ---
 
-## TinkerCad: [Projeto](https://www.tinkercad.com/things/eqazHuI6MxB-global-solution/editel?returnTo=https%3A%2F%2Fwww.tinkercad.com%2Fdashboard)
+## 🛠 TinkerCad: 
+
+ - [Projeto](https://www.tinkercad.com/things/eqazHuI6MxB-global-solution/editel?returnTo=https%3A%2F%2Fwww.tinkercad.com%2Fdashboard)
+
+## 🎥 Youtube: 
+ - [Video](https://www.youtube.com/watch?v=5TrXFqfH2YI)
 
 ## 📸 Imagens
 
