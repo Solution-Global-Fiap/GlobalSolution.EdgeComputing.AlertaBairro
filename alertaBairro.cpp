@@ -8,9 +8,29 @@
 #define SENSOR_SOIL_MOISTURE A0
 #define SENSOR_FORCE A1
 #define SENSOR_HUMIDITY_POTENTIOMETER A2
-#define SENSOR_TEMPERATURE A3
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+const long warningPercentage = 33;
+const long dangerPercentage = 66;
+
+const long warningForceAppliedRain = 3;
+const long dangerForceAppliedRain = 6;
+
+bool isSoilMoistureDanger = false;
+bool isHumidityDanger = false;
+bool isRainForceDanger = false;
+
+bool isSoilMoistureWarning = false;
+bool isHumidityWarning = false;
+bool isRainForceWarning = false;
+
+long soilMoisturePercentage = 0;
+long humidityPercentage = 0;
+long forceApplied = 0;
+
+int showChangesTime = 0;
+int showChangesDelay = 1000;
 
 void setup() {
     pinMode(LED_GREEN, OUTPUT);
