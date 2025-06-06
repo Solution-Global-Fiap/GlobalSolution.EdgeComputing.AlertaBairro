@@ -29,10 +29,7 @@ void setup() {
 }
 
 void loop() {
-    //getTemperatureCelsius();
-  	//getHumidityPercentage();
-  	//getSoilMoisturePercentage();
-    getForceNewton();
+
 }
 
 void turnLeds(int green, int yellow, int red) {
@@ -43,6 +40,17 @@ void turnLeds(int green, int yellow, int red) {
 
 void turnBuzzer(int buzzer) {
     digitalWrite(BUZZER, buzzer);
+}
+
+void lcdPrintFirstLine(char* text) {
+    lcd.clear();
+    lcd.home();
+    lcd.print(text);
+}
+
+void lcdPrintSecondLine(char* text) {
+    lcd.setCursor(0, 1);
+    lcd.print(text);
 }
 
 long getHumidityPercentage() {
@@ -75,6 +83,7 @@ long getSoilMoisturePercentage() {
 
     return moisturePercentage;
 }
+
 long getForceNewton() {
     int force = analogRead(SENSOR_FORCE);
     //double forceNewtons = map(force, 0, 466, 0, 1000) / 100.0;
@@ -83,5 +92,5 @@ long getForceNewton() {
     Serial.print("Forca aplicada: ");
     Serial.println(forceNewton);
 
-    return (long)forceNewtons;
+    return (long)forceNewton;
 }
