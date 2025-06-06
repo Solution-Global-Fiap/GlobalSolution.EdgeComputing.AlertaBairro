@@ -49,7 +49,100 @@ void setup() {
 }
 
 void loop() {
+    unsigned int currentTime = millis();
 
+    if (currentTime - showChangesTime >= showChangesDelay) {
+        handleApplicationChangeState();
+        showChangesTime = currentTime;
+    }
+
+    handleSoilMoistureSensor();
+    handleForceSensor();
+    handleHumiditySensor();
+}
+
+void handleApplicationChangeState() {
+    bool isDanger = (isHumidityDanger || isRainForceDanger || isSoilMoistureDanger);
+
+    if (isDanger) {
+        lcdPrintFirstLine("    PERIGO!!    ");
+        lcdPrintSecondLine(" RISCO ENCHENTE ");
+        turnLeds(LOW, LOW, HIGH);
+        turnBuzzer(HIGH);
+    }
+    else if (isSoilMoistureWarning || isHumidityWarning || isRainForceWarning) {
+        lcdPrintFirstLine("     Alerta     ");
+
+        if (isSoilMoistureWarning) {
+            lcdPrintValueText("Um. Solo: ", soilMoisturePercentage, 2, "%");
+        }
+        else if (isHumidityWarning) {
+            lcdPrintValueText(" Um. Ar: ", humidityPercentage, 2, "% ");
+        }
+        else  {
+            lcdPrintSecondLine("  Chuva: FORTE  ");
+        }
+        
+        turnLeds(LOW, HIGH, LOW);
+        turnBuzzer(LOW);
+    }
+    else {
+        lcdPrintFirstLine("  Risco Baixo  ");
+        lcdPrintSecondLine("   Tudo Certo   ");
+        turnLeds(HIGH, LOW, LOW);
+        turnBuzzer(LOW);
+    }
+}
+
+void handleSoilMoistureSensor() {
+    soilMoisturePercentage = getSoilMoisturePercentage();
+
+    if (soilMoisturePercentage >= dangerPercentage) {
+        isSoilMoistureDanger = true;
+        isSoilMoistureWarning = false;
+    }
+    else if (soilMoisturePercentage >= warningPercentage) {
+        isSoilMoistureWarning = true;
+        isSoilMoistureDanger = false;
+    }
+    else {
+        isSoilMoistureDanger = false;
+        isSoilMoistureWarning = false;
+    }
+}
+
+void handleForceSensor() {
+    forceApplied = getForceNewton();
+
+    if (forceApplied >= dangerForceAppliedRain) {
+        isRainForceDanger = true;
+        isRainForceWarning = false;
+    }
+    else if (forceApplied >= warningForceAppliedRain) {
+        isRainForceWarning = true;
+        isRainForceDanger = false;
+    }
+    else {
+        isRainForceDanger = false;
+        isRainForceWarning = false;
+    }
+}
+
+void handleHumiditySensor() {
+    humidityPercentage = getHumidityPercentage();
+
+    if (humidityPercentage >= dangerPercentage) {
+        isHumidityDanger = true;
+        isHumidityWarning = false;
+    }
+    else if (humidityPercentage >= warningPercentage) {
+        isHumidityWarning = true;
+        isHumidityDanger = false;
+    }
+    else {
+        isHumidityDanger = false;
+        isHumidityWarning = false;
+    }
 }
 
 void turnLeds(int green, int yellow, int red) {
