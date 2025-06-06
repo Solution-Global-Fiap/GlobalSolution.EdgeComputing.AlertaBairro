@@ -73,6 +73,13 @@ void lcdPrintSecondLine(char* text) {
     lcd.print(text);
 }
 
+void lcdPrintValueText(const char* prefix, float value, int decimalPlaces, const char* sufix) {
+	lcd.setCursor(0, 1);
+	lcd.print(prefix);
+	lcd.print(value, decimalPlaces);
+	lcd.print(sufix);
+}
+
 long getHumidityPercentage() {
   	int humiditySensorOutput = analogRead(SENSOR_HUMIDITY_POTENTIOMETER);
 	long humidityPercentage = map(humiditySensorOutput, 0, 1023, 0, 100);
