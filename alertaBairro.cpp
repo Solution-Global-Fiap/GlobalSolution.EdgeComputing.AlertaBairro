@@ -83,17 +83,6 @@ long getHumidityPercentage() {
 	return humidityPercentage;
 }
 
-long getTemperatureCelsius() {
-	int rawValue = analogRead(SENSOR_TEMPERATURE);
-    double voltage = (rawValue / 1023.0) * 5000.0;
-    double tempCelsius = (voltage - 500) * 0.1;
-
-	Serial.print("Temperatura: ");
-  	Serial.println(tempCelsius);
-
-  	return (long)tempCelsius;
-}
-
 long getSoilMoisturePercentage() {
     double moisture = analogRead(SENSOR_SOIL_MOISTURE);
     long moisturePercentage = map(moisture, 0, 876, 0, 100);
